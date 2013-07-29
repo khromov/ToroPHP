@@ -2,20 +2,9 @@
 
 class Toro
 {
-    public static function serve($routes, $route_prefix = '', $route_case_sensitive = true)
+    public static function serve($routes, $route_case_sensitive = true)
     {
         ToroHook::fire('before_request');
-		
-        //If route prefix is set
-        if($route_prefix !== '')
-        {
-            //Apply route prefix for every route
-            foreach($routes as $route => $handler)
-            {
-                $routes[$route_prefix . $route] = $handler;
-                unset($routes[$route]);
-            }
-         }
 
         $request_method = strtolower($_SERVER['REQUEST_METHOD']);
         $path_info = '/';
